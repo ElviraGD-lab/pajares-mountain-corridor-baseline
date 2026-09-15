@@ -81,7 +81,18 @@ separate a radiometric shift from real change.
 | Regional composites, 2020 vs 2025 | `notebooks/04_regional_composites.ipynb` |
 
 Processing order, with the two additions that tutorial material omits:
-
+```text
+1. Search STAC, inventory metadata, decide parameters on the counts
+2. Load, mask NoData, convert to reflectance
+3. Quality mask - clouds AND terrain shadow AND snow          [addition]
+4. Compute the index
+5. Extract the point or the area
+6. Reject implausible values                                  [addition]
+7. Resample to a regular grid
+8. Interpolate inside the series only - never fill the ends    [changed]
+9. Smooth
+10. Leave gaps where no data exists                            [changed]
+```
 A smoothing filter does not remove an error. It spreads the error across the
 neighbours and makes it invisible. Quality control therefore precedes smoothing.
 
